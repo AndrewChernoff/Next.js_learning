@@ -1,0 +1,17 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &_active {
+        color: red($color: #000000)
+    }
+}
+
+.nav_active {
+    color: red($color: #000000)
+}
+
+.nav_inactive {
+    color: blue
+}
