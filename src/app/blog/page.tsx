@@ -3,6 +3,7 @@
 import Layout from '@/components/screen/layout/Layout';
 import Search from '@/components/ui/BlogPage/Search';
 import { api } from '@/service/api';
+import { usePosts } from '@/store/store';
 import axios from 'axios';
 import { Metadata, NextPage } from 'next';
 import Link from 'next/link';
@@ -38,20 +39,22 @@ export const metadata: Metadata = {
 const Blog: NextPage = ({}) => {
 
 
-  const [posts, setPosts] = useState<any[]>([])
+  //const [posts, setPosts] = useState<any[]>([])
 
-  //const posts =  await getData();
+  const {fetchPosts, fetchOnParam, posts} = usePosts() 
 
   useEffect( () => {
-    api.getAllPosts()
-    .then(setPosts)
+    /* api.getAllPosts()
+    .then(setPosts) */
+    fetchPosts()
+    console.log(posts);
     
   }, [])
 
   return (
     <Layout>
       <h1>Blog page</h1>
-      <Search onSearch={setPosts}/>
+      <Search /* onSearch={setPosts} */ onSearch={fetchOnParam} /> 
       <ul>
         {posts.map((post: any) => (
           <li key={post.id}>

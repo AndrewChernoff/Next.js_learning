@@ -5,11 +5,6 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { cache } from 'react';
 
-interface Props {}
-
-
-
-
 export async function generateMetadata({params: {id}}: any) {
   return {
     title: id
@@ -23,7 +18,7 @@ export const revalidate = 60
   return api.getPost(id)
 });
 
-const Post: NextPage<Props> = async ({params: {id}}: any) => {
+const Post: NextPage = async ({params: {id}}: any) => {
     
 
   const post = await getData(id)

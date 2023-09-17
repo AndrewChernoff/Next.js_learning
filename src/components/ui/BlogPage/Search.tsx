@@ -12,9 +12,10 @@ const Search: NextPage<Props> = ({onSearch}) => {
     const [title, setTitle] = useState('')
     const onSubmitHandler = async (e: any) => {
         e.preventDefault()
-        const posts = await api.getPostByTitle(title)
+        //const posts = await api.getPostByTitle(title)
             
-        onSearch(posts)
+        //onSearch(posts)
+        onSearch(title)
 
         
     }

@@ -1,19 +1,11 @@
 import axios from "axios";
 
 
-type Post = {
-    id: number;
-    slug: string;
-    url: string;
-    title: string;
-    content: string;
-    image: string;
-    thumbnail: string;
-    status: string;
-    category: string;
-    publishedAt: string;
-    updatedAt: string;
-    userId: number;
+export type Post = {
+    userId: number,
+    id: number,
+    title: string
+    body: string
   }
 
 export const api = {
@@ -29,7 +21,7 @@ export const api = {
     },
 
     async getPostByTitle(title: string) {
-        const res = await axios.get<Post>(`https://jsonplaceholder.typicode.com/posts?q=${title}`);
+        const res = await axios.get<Post[]>(`https://jsonplaceholder.typicode.com/posts?q=${title}`);
         return  res.data
 
     },
