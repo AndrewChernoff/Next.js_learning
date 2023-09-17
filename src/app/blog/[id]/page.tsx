@@ -1,4 +1,5 @@
 
+import { api } from '@/service/api';
 import axios from 'axios'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -6,20 +7,7 @@ import { cache } from 'react';
 
 interface Props {}
 
-type Post = {
-  id: number;
-  slug: string;
-  url: string;
-  title: string;
-  content: string;
-  image: string;
-  thumbnail: string;
-  status: string;
-  category: string;
-  publishedAt: string;
-  updatedAt: string;
-  userId: number;
-}
+
 
 
 export async function generateMetadata({params: {id}}: any) {
@@ -32,9 +20,7 @@ export const revalidate = 60
 
 
  const getData = cache(async (id:string) => {
-     const res = await axios.get<Post>(`https://jsonplaceholder.org/posts/${id}`);
-
-     return  res.data
+  return api.getPost(id)
 });
 
 const Post: NextPage<Props> = async ({params: {id}}: any) => {

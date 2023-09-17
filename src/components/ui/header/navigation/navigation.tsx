@@ -21,10 +21,7 @@ const Navigation: NextPage<Props> = ({ links }) => {
   return (
     <nav className={s.nav}>
       {links.map((el) => {
-        const isActive = pathname === el.path;
-
-        //console.log(isActive);
-        
+        const isActive = pathname === el.path;        
 
         return (
           <Link className={!isActive ? s.nav_active : s.nav_inactive} href={el.path}>

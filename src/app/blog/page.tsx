@@ -1,8 +1,12 @@
+"use client"
+
 import Layout from '@/components/screen/layout/Layout';
+import Search from '@/components/ui/BlogPage/Search';
+import { api } from '@/service/api';
 import axios from 'axios';
 import { Metadata, NextPage } from 'next';
 import Link from 'next/link';
-import { cache } from 'react';
+import { cache, useEffect, useState } from 'react';
 
 type Post = {
   id: number;
@@ -23,9 +27,7 @@ export const revalidate = 60
 
 
  const getData = cache(async () => {
-     const res = await axios.get<Post[]>('https://jsonplaceholder.org/posts');
-
-     return  res.data
+    return api.getAllPosts()
 });
 
 
@@ -33,13 +35,23 @@ export const metadata: Metadata = {
   title: 'Blog'
 }
 
-const Blog: NextPage = async ({}) => {
+const Blog: NextPage = ({}) => {
 
-  const posts =  await getData(); 
+
+  const [posts, setPosts] = useState<any[]>([])
+
+  //const posts =  await getData();
+
+  useEffect( () => {
+    api.getAllPosts()
+    .then(setPosts)
+    
+  }, [])
 
   return (
     <Layout>
       <h1>Blog page</h1>
+      <Search onSearch={setPosts}/>
       <ul>
         {posts.map((post: any) => (
           <li key={post.id}>
