@@ -10,8 +10,9 @@ export type Post = {
 
 export const api = {
     async getAllPosts() {
-        const res = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
-        return  res.data
+        
+        const res = await axios.get<any>('/api/posts');
+        return  res.data.pizzasItems
     },
 
     async getPost(id: string) {
@@ -21,8 +22,8 @@ export const api = {
     },
 
     async getPostByTitle(title: string) {
-        const res = await axios.get<Post[]>(`https://jsonplaceholder.typicode.com/posts?q=${title}`);
-        return  res.data
+        const res = await axios.get<any>(`/api/posts?q=${title}`);
+        return  res.data.pizzasItems
 
     },
 

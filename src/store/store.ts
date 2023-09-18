@@ -23,7 +23,6 @@ export const usePosts = create<PostsStore>((set) => ({
   fetchOnParam: async (title: string) => {
     set(() => ({ loading: true }));
     try {
-        debugger
       const qwet = await api.getPostByTitle(title);
       set((state) => ({ posts: (state.posts = qwet), loading: false }));
     } catch (err) {
